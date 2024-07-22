@@ -1,7 +1,9 @@
 package org.hildabur;
 
+import org.hildabur.providers.ArgumentProvider;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        ArgumentProvider.getArguments(args);
     }
 }
