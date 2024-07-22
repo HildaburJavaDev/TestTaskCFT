@@ -6,8 +6,9 @@ import org.hildabur.utils.Notificator;
 public class ArgumentProvider {
     public static ArgumentStorage getArguments(String[] args) {
         ArgumentStorage argumentStorage = new ArgumentStorage();
-        for (String str : args) {
-            switch (str) {
+        int argsLength = args.length;
+        for (int i = 0; i < argsLength; i++) {
+            switch (args[i]) {
                 case "-a", "-A" -> argumentStorage.setOptionA(true);
                 case "-s", "-S" -> {
                     if (argumentStorage.isOptionF()) {
@@ -23,9 +24,11 @@ public class ArgumentProvider {
                         argumentStorage.setOptionF(true);
                     }
                 }
-                default -> Notificator.printWarning("Unknown option \"" + str + "\". Skipped");
+                case "-p", "-P" -> argumentStorage.setFileNamePrefix(args[++i]);
+                case "-o", "-O" -> argumentStorage.setFilepath(args[++i]);
+                default -> Notificator.printWarning("Unknown option \"" + args[i] + "\". Skipped");
             }
         }
-        return null;
+        return argumentStorage;
     }
 }
