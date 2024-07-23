@@ -26,7 +26,7 @@ public class ArgumentProvider {
                 }
                 case "-p", "-P" -> argumentStorage.setFileNamePrefix(args[++i]);
                 case "-o", "-O" -> argumentStorage.setFilepath(args[++i]);
-                default -> Notificator.printWarning("Unknown option \"" + args[i] + "\". Skipped");
+                default -> argumentStorage.addFile(args[i]);
             }
         }
         return argumentStorage;
