@@ -1,7 +1,6 @@
 package org.hildabur.models;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.math.RoundingMode;
 
 public class FloatStats extends Stats {

@@ -1,7 +1,7 @@
 package org.hildabur.models;
 
 public interface StatsInterface {
-    public String getFullStats();
+    String getFullStats();
 
-    public String getShortStats(String dataTypeName);
+    String getShortStats(String dataTypeName);
 }
