@@ -6,6 +6,9 @@ import org.hildabur.services.DirectoryProvider;
 import org.hildabur.storage.ArgumentStorage;
 import org.hildabur.utils.Notificator;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class Main {
     public static void main(String[] args) {
         start(args);
@@ -17,6 +20,8 @@ public class Main {
         if (!directoryManager.createDirectoryIfNeed()) {
             Notificator.printWarning("Invalid path. Result will be in default location");
             argumentStorage.setFilepath("");
+        } else {
+            ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
         }
     }
 }
