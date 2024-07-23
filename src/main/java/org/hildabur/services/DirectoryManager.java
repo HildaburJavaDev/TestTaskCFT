@@ -1,11 +1,13 @@
 package org.hildabur.services;
 
+import lombok.Getter;
 import org.hildabur.utils.Notificator;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 
+@Getter
 public class DirectoryManager {
     private final DirectoryProvider directoryProvider;
 
