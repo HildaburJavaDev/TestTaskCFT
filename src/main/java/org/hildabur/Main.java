@@ -3,6 +3,7 @@ package org.hildabur;
 import org.hildabur.services.ArgumentProvider;
 import org.hildabur.services.DirectoryManager;
 import org.hildabur.services.DirectoryProvider;
+import org.hildabur.services.FileProcessorService;
 import org.hildabur.storage.ArgumentStorage;
 import org.hildabur.utils.Notificator;
 
@@ -22,6 +23,10 @@ public class Main {
             argumentStorage.setFilepath("");
         } else {
             ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+            for (String fileName: argumentStorage.getFiles()) {
+                executorService.execute(new FileProcessorService(argumentStorage, directoryManager.getDirectoryProvider(), fileName));
+            }
+            executorService.shutdown();
         }
     }
 }
