@@ -15,4 +15,7 @@ public enum DataType {
     public String getFileName() {
         return fileName;
     }
+    public String getTypeName() {
+        return this.name();
+    }
 }
