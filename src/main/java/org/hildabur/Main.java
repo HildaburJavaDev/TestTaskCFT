@@ -7,7 +7,7 @@ import org.hildabur.models.StringsStats;
 import org.hildabur.services.ArgumentProvider;
 import org.hildabur.services.DirectoryManager;
 import org.hildabur.services.DirectoryProvider;
-import org.hildabur.services.FileProcessorService;
+import org.hildabur.services.FileService;
 import org.hildabur.storage.ArgumentStorage;
 import org.hildabur.utils.DataType;
 import org.hildabur.utils.Notificator;
@@ -33,7 +33,7 @@ public class Main {
 
             ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
             for (String fileName: argumentStorage.getFiles()) {
-                executorService.execute(new FileProcessorService(argumentStorage, directoryManager.getDirectoryProvider(), fileName, statsMap));
+                executorService.execute(new FileService(argumentStorage, fileName, statsMap));
             }
             executorService.shutdown();
             printStats(statsMap, argumentStorage.isOptionF());
