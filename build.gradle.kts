@@ -28,10 +28,13 @@ application {
 }
 
 tasks.jar {
+    archiveFileName.set("content-filter.jar")
     manifest {
         attributes["Main-Class"] = application.mainClass.get()
     }
+    from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
 }
+
 
 tasks.named<Jar>("jar") {
     from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
