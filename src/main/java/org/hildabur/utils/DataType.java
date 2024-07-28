@@ -1,6 +1,6 @@
 package org.hildabur.utils;
 
-public enum DataTypes {
+public enum DataType {
     INTEGER("integers.txt"),
     FLOAT("floats.txt"),
     STRING("strings.txt"),
@@ -8,7 +8,7 @@ public enum DataTypes {
 
     private final String fileName;
 
-    DataTypes(String fileName) {
+    DataType(String fileName) {
         this.fileName = fileName;
     }
 
