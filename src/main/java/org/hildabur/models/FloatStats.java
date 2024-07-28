@@ -19,7 +19,7 @@ public class FloatStats extends Stats {
     public void updateStats(Object value) {
         updateStats((BigDecimal) value);
     }
-    private void updateStats(BigDecimal number) {
+    private synchronized void updateStats(BigDecimal number) {
         incrementCount();
         updateMaxMin(number);
         updateSum(number);
@@ -49,16 +49,18 @@ public class FloatStats extends Stats {
     }
     @Override
     public String getFullStats() {
-        return count != 0 ? ("Full stats for Floats: " +
-                "\ncount: " +
+        return
+                count != 0 ?
+                ("Full stats for Floats: " +
+                "\n\tcount: " +
                 count +
-                "\nSum: " +
+                "\n\tSum: " +
                 sum.toString() +
-                "\nMax: " +
+                "\n\tMax: " +
                 max.toString() +
-                "\nMin: " +
+                "\n\tMin: " +
                 min.toString() +
-                "\nAVG: " +
+                "\n\tAVG: " +
                 calcAvg().toString())
                 : ("No float stats, because this datatype wasn't in input files");
     }

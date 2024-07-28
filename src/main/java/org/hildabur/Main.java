@@ -15,12 +15,14 @@ import org.hildabur.utils.Notificator;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
     public static void main(String[] args) {
         start(args);
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     private static void start(String[] args) {
         ArgumentStorage argumentStorage = ArgumentProvider.getArguments(args);
         DirectoryManager directoryManager = new DirectoryManager(new DirectoryProvider(argumentStorage.getFilepath()));
@@ -36,13 +38,20 @@ public class Main {
                 executorService.execute(new FileService(argumentStorage, fileName, statsMap));
             }
             executorService.shutdown();
+            try {
+                while (!executorService.isTerminated()) {
+                    executorService.awaitTermination(1, TimeUnit.SECONDS);
+                }
+            } catch (InterruptedException e) {
+                executorService.shutdownNow();
+            }
             printStats(statsMap, argumentStorage.isOptionF());
         }
     }
 
     private static void initializeStatsMap(ConcurrentHashMap<DataType, Stats> statsMap) {
-        statsMap.put(DataType.INTEGER, new IntegerStats());
         statsMap.put(DataType.FLOAT, new FloatStats());
+        statsMap.put(DataType.INTEGER, new IntegerStats());
         statsMap.put(DataType.STRING, new StringsStats());
     }
     private static void printStats(ConcurrentHashMap<DataType, Stats> statsMap, boolean isOutFullStats) {
