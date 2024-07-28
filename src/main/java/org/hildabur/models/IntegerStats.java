@@ -16,7 +16,12 @@ public class IntegerStats extends Stats {
         min = BigInteger.valueOf(Long.MAX_VALUE);
     }
 
-    public void updateStats(BigInteger number) {
+    @Override
+    public void updateStats(Object value) {
+        updateStats((BigInteger) value);
+    }
+
+    private void updateStats(BigInteger number) {
         incrementCount();
         updateMaxMin(number);
         updateSum(number);
@@ -49,7 +54,7 @@ public class IntegerStats extends Stats {
 
     @Override
     public String getFullStats() {
-        return "Full stats for Integers: " +
+        return count != 0 ? ("Full stats for Integers: " +
                 "\ncount: " +
                 count +
                 "\nSum: " +
@@ -59,6 +64,7 @@ public class IntegerStats extends Stats {
                 "\nMin: " +
                 min.toString() +
                 "\nAVG: " +
-                calcAvg().toString();
+                calcAvg().toString())
+                : ("No integer stats, because this datatype wasn't in input files");
     }
 }

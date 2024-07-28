@@ -10,7 +10,11 @@ public class StringsStats extends Stats{
         maxLength = Integer.MIN_VALUE;
     }
 
-    public void updateStats(String str) {
+    @Override
+    public void updateStats(Object value) {
+        updateStats((String) value);
+    }
+    private void updateStats(String str) {
         int length = str.length();
         incrementCount();
         if (minLength > length) {
@@ -22,8 +26,10 @@ public class StringsStats extends Stats{
     }
     @Override
     public String getFullStats() {
-        return "Full stats for Strings: " + count
-                + "\nMax length: " + maxLength
-                + "\nMin length: " + minLength;
+        return count != 0
+                ? ("Full stats for Strings: " + count +
+                "\n\tMax length: " + maxLength
+                + "\nMin length: " + minLength)
+                : ("No string stats, because this datatype wasn't in input files");
     }
 }

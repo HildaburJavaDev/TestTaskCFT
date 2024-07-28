@@ -7,6 +7,10 @@ public abstract class Stats implements StatsInterface {
         this.count = 0;
     }
 
+    public int getCount() {
+        return count;
+    }
+
     public void incrementCount() {
         ++count;
     }
@@ -14,7 +18,8 @@ public abstract class Stats implements StatsInterface {
     public abstract String getFullStats();
 
     public String getShortStats(String dataTypeName) {
-        return "Short stats for " + dataTypeName + ":" +
-                "\ncount: " + count;
+        return count != 0 ? ("Short stats for " + dataTypeName + ":" +
+                "\ncount: " + count)
+                : ("No stats for " + dataTypeName + ", because this datatype wasn't in input files");
     }
 }

@@ -15,7 +15,11 @@ public class FloatStats extends Stats {
         min = BigDecimal.valueOf(Double.MAX_VALUE);
     }
 
-    public void updateStats(BigDecimal number) {
+    @Override
+    public void updateStats(Object value) {
+        updateStats((BigDecimal) value);
+    }
+    private void updateStats(BigDecimal number) {
         incrementCount();
         updateMaxMin(number);
         updateSum(number);
@@ -45,7 +49,7 @@ public class FloatStats extends Stats {
     }
     @Override
     public String getFullStats() {
-        return "Full stats for Floats: " +
+        return count != 0 ? ("Full stats for Floats: " +
                 "\ncount: " +
                 count +
                 "\nSum: " +
@@ -55,6 +59,7 @@ public class FloatStats extends Stats {
                 "\nMin: " +
                 min.toString() +
                 "\nAVG: " +
-                calcAvg().toString();
+                calcAvg().toString())
+                : ("No float stats, because this datatype wasn't in input files");
     }
 }
