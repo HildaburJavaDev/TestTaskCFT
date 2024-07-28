@@ -29,7 +29,7 @@ public class FileProcessorService implements Runnable{
         } catch (FileNotFoundException e) {
             Notificator.printWarning("Error: The file '" + fileName + "' was not found. Please check the file path and try again.");
         } catch (IOException e) {
-            Notificator.printWarning("Error: An unexpected error occurred while processing the file '" + fileName + "'. Please try again later or contact support if the problem persists.");
+            Notificator.printWarning("Error: An unexpected error occurred while processing the file '" + fileName + "'.");
         }
     }
 }
