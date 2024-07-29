@@ -36,8 +36,6 @@ public class FileService implements Runnable {
         }
     }
 
-
-
     @SuppressWarnings("SynchronizationOnLocalVariableOrMethodParameter")
     private void updateDataTypeStats(DataType dataType, String line) {
         Stats stats = statsMap.get(dataType);
